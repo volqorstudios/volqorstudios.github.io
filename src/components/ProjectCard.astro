@@ -1,0 +1,120 @@
+---
+import AsyncImage from "./AsyncImage.astro";
+import { getPlatformIcon } from "../data/projects.js";
+
+const { project } = Astro.props;
+const platformIcon = getPlatformIcon(project.platform);
+---
+
+
+
+
+
+<a href={`/proyectos/${project.slug}/`} class="project-card">
+  <div class="project-card-top">
+    {
+      project.icon && (
+        <AsyncImage
+          src={project.icon}
+          alt=""
+          width="48"
+          height="48"
+          wrapClass="project-icon-wrap"
+          class="project-icon"
+        />
+      )
+    }
+  </div>
+  <h3 class="project-name">{project.name}</h3>
+  <p class="project-tagline">{project.tagline}</p>
+  <div class="project-availability">
+    <span class="project-availability-label">Disponible para:</span>
+    <div class="project-availability-icons">
+      {
+        platformIcon && (
+          <img
+            src={platformIcon}
+            alt={project.platform}
+            width="22"
+            height="22"
+            class="project-availability-icon"
+          />
+        )
+      }
+    </div>
+  </div>
+</a>
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 28px;
+    background: var(--color-surface);
+    border: 3px solid var(--color-border);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-ink);
+    text-decoration: none;
+    color: var(--color-text);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .project-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: calc(var(--shadow-offset) + 3px)
+      calc(var(--shadow-offset) + 3px) 0 var(--color-ink);
+  }
+  .project-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .project-icon-wrap {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+  .project-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 20%;
+    border: 2px solid var(--color-border);
+    object-fit: cover;
+  }
+  .entry-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+  }
+  .project-name {
+    font-size: 1.3rem;
+  }
+  .project-tagline {
+    color: var(--color-text-dim);
+    font-size: 0.95rem;
+  }
+  .project-availability {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 10px;
+  }
+  .project-availability-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+  }
+  .project-availability-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .project-availability-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+  }
+</style>

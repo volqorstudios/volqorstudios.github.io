@@ -1,0 +1,233 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AsyncImage from "../../components/AsyncImage.astro";
+
+const description =
+  "Contacta a VOLQOR Studios: correo del estudio, contacto del fundador Christian y redes sociales.";
+---
+
+
+
+
+
+<BaseLayout title="Contacto" description={description} path="/contacto/">
+  <section class="wrap page-header">
+    <h1>Contacto</h1>
+    <p class="page-description">
+      Escribenos por cualquiera de estos medios. Respondemos directamente, sin
+      intermediarios.
+    </p>
+  </section>
+
+  <section class="wrap manifesto">
+    <article class="manifesto-item">
+      <AsyncImage
+        src="/imgpages/contact/01.svg"
+        alt=""
+        width="240"
+        height="240"
+        loading="lazy"
+        wrapClass="manifesto-illustration-wrap"
+        class="ink-illustration manifesto-illustration"
+      />
+      <div class="manifesto-copy">
+        <h3>Aqui se escucha, no se ignora.</h3>
+        <p>
+          El contacto es un medio de comunicacion serio. Cada mensaje se lee o
+          se escucha con atencion real.
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <section class="wrap contact-grid">
+    <article class="contact-card">
+      <h2>VOLQOR Studios</h2>
+      <ul class="contact-list">
+        <li>
+          <span class="contact-label">Correo</span>
+          <a href="mailto:volqor@proton.me">volqor@proton.me</a>
+        </li>
+      </ul>
+    </article>
+
+    <article class="contact-card">
+      <h2>Christian, fundador y desarrollador principal</h2>
+      <ul class="contact-list">
+        <li>
+          <span class="contact-label">Correo</span>
+          <a href="mailto:contact.christcastr@gmail.com"
+            >contact.christcastr@gmail.com</a
+          >
+        </li>
+        <li>
+          <span class="contact-label">WhatsApp</span>
+          <a
+            href="https://wa.me/50375528908"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            +503 7552 8908
+          </a>
+        </li>
+        <li>
+          <span class="contact-label">Instagram</span>
+          <a
+            href="https://instagram.com/christcastr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @christcastr
+          </a>
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="wrap manifesto">
+    <article class="manifesto-item">
+      <AsyncImage
+        src="/imgpages/contact/02.svg"
+        alt=""
+        width="240"
+        height="240"
+        loading="lazy"
+        wrapClass="manifesto-illustration-wrap"
+        class="ink-illustration manifesto-illustration"
+      />
+      <div class="manifesto-copy">
+        <h3>Si no respondemos, hubo un motivo.</h3>
+        <p>
+          Si no recibes respuesta es porque se considero que tu mensaje fue
+          ofensivo o una broma. Dilo mejor, con claridad, y con gusto te
+          responderemos.
+        </p>
+      </div>
+    </article>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-block: 72px 48px;
+    max-width: 720px;
+  }
+
+  .page-header h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+  }
+
+  .page-description {
+    margin-top: 20px;
+    color: var(--color-text-dim);
+    font-size: 1.05rem;
+  }
+
+  .manifesto {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-block: 16px 48px;
+  }
+
+  .manifesto-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .manifesto-illustration-wrap {
+    width: 240px;
+    height: 240px;
+    flex-shrink: 0;
+  }
+
+  .manifesto-illustration {
+    width: 240px;
+    height: 240px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .manifesto-copy h3 {
+    font-size: 1.35rem;
+    max-width: 30ch;
+  }
+
+  .manifesto-copy p {
+    margin-top: 14px;
+    color: var(--color-text-dim);
+    font-size: 1rem;
+    max-width: 52ch;
+  }
+
+  @media (max-width: 680px) {
+    .manifesto-illustration-wrap {
+      width: 180px;
+      height: 180px;
+    }
+
+    .manifesto-illustration {
+      width: 180px;
+      height: 180px;
+    }
+
+    .manifesto-copy p {
+      max-width: none;
+    }
+
+    .manifesto-item {
+      gap: 32px;
+    }
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    padding-block: 24px 96px;
+  }
+
+  .contact-card {
+    background: var(--color-surface);
+    border: 3px solid var(--color-border);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-ink);
+    padding: 28px;
+  }
+
+  .contact-card h2 {
+    font-size: 1.15rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+  }
+
+  .contact-list {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  .contact-list a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 1rem;
+  }
+
+  .contact-list a:hover {
+    text-decoration: underline;
+  }
+</style>

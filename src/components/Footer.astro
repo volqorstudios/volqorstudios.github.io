@@ -1,0 +1,70 @@
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="footer-name">VOLQOR Studios</span>
+      <p class="footer-tagline">
+        Estudio independiente de aplicaciones y experimentacion en inteligencia
+        artificial, desde El Salvador.
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <a href="/proyectos/">Proyectos</a>
+      <a href="/equipo/">Equipo</a>
+      <a href="/contacto/">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 3px solid var(--color-border);
+    margin-top: 96px;
+    padding-block: 48px 24px;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .footer-inner {
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 32px;
+    }
+  }
+
+  .footer-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+
+  .footer-tagline {
+    color: var(--color-text-dim);
+    font-size: 0.9rem;
+    max-width: 36ch;
+    margin-top: 10px;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.9rem;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: var(--color-text-dim);
+    transition: color 0.15s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-accent);
+  }
+</style>

@@ -1,0 +1,161 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import AsyncImage from "../../components/AsyncImage.astro";
+import { projects } from "../../data/projects.js";
+
+const description =
+  "Explora las aplicaciones desarrolladas por VOLQOR Studios: herramientas utiles, simples y pensadas para resolver problemas reales.";
+---
+
+
+
+
+
+<BaseLayout title="Proyectos" description={description} path="/proyectos/">
+  <section class="wrap page-header">
+    <h1>Proyectos</h1>
+    <p class="page-description">
+      Cada aplicacion nace de un problema real que valia la pena resolver. Aqui esta el registro completo de lo que hemos publicado hasta ahora.
+    </p>
+  </section>
+
+  <section class="wrap manifesto">
+    <article class="manifesto-item">
+      <AsyncImage
+        src="/imgpages/projects/01.svg"
+        alt=""
+        width="240"
+        height="240"
+        loading="lazy"
+        wrapClass="manifesto-illustration-wrap"
+        class="ink-illustration manifesto-illustration"
+      />
+      <div class="manifesto-copy">
+        <h3>No perseguimos ingresos a costa de lo humano.</h3>
+        <p>
+          La mayoria prioriza maximizar ingresos aunque cueste calidad o utilidad real. Esa no es nuestra prioridad.
+        </p>
+      </div>
+    </article>
+
+    <article class="manifesto-item">
+      <AsyncImage
+        src="/imgpages/projects/02.svg"
+        alt=""
+        width="240"
+        height="240"
+        loading="lazy"
+        wrapClass="manifesto-illustration-wrap"
+        class="ink-illustration manifesto-illustration"
+      />
+      <div class="manifesto-copy">
+        <h3>Si no es util, no se publica.</h3>
+        <p>
+          Publicamos una aplicacion porque es verdaderamente util, aunque genere pocos ingresos por si sola. El proyecto se sostiene con publicidad minima y no invasiva, o con donaciones voluntarias.
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <section class="wrap projects-grid">
+    {
+      projects.map((project) => (
+        <ProjectCard project={project} />
+      ))
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-block: 72px 48px;
+    max-width: 720px;
+  }
+
+  .page-header h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+  }
+
+  .page-description {
+    margin-top: 20px;
+    color: var(--color-text-dim);
+    font-size: 1.05rem;
+  }
+
+  .manifesto {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-block: 16px 64px;
+  }
+
+  .manifesto-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .manifesto-item:nth-child(even) {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .manifesto-illustration-wrap {
+    width: 240px;
+    height: 240px;
+    flex-shrink: 0;
+  }
+
+  .manifesto-illustration {
+    width: 240px;
+    height: 240px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .manifesto-copy h3 {
+    font-size: 1.35rem;
+    max-width: 30ch;
+  }
+
+  .manifesto-copy p {
+    margin-top: 14px;
+    color: var(--color-text-dim);
+    font-size: 1rem;
+    max-width: 52ch;
+  }
+
+  @media (max-width: 680px) {
+    .manifesto-illustration-wrap {
+      width: 180px;
+      height: 180px;
+    }
+
+    .manifesto-illustration {
+      width: 180px;
+      height: 180px;
+    }
+
+    .manifesto-copy p {
+      max-width: none;
+    }
+
+    .manifesto-item {
+      gap: 32px;
+    }
+
+    .manifesto-item:nth-child(even) {
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    padding-block: 24px 96px;
+  }
+</style>

@@ -1,0 +1,171 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const { title, description, path = "/", jsonLd = null } = Astro.props;
+
+const siteUrl = "https://volqorstudios.github.io";
+const canonicalUrl = new URL(path, siteUrl).toString();
+const socialImage = new URL("/og-image.png", siteUrl).toString();
+const fullTitle = `${title} | VOLQOR Studios`;
+---
+
+
+
+
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="VOLQOR Studios" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="VOLQOR Studios" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    {
+      jsonLd && (
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+      )
+    }
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --color-bg: #f4f1e8;
+    --color-surface: #ffffff;
+    --color-surface-raised: #ffffff;
+    --color-text: #111111;
+    --color-text-dim: #4a4a46;
+    --color-accent: #d1352b;
+    --color-accent-dim: #a32921;
+    --color-ink: #111111;
+    --color-border: #111111;
+
+    --shadow-offset: 5px;
+
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+
+    --max-width: 1120px;
+
+    --halftone-bg: radial-gradient(
+      circle,
+      rgba(17, 17, 17, 0.08) 1px,
+      transparent 1.4px
+    );
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-bg);
+    background-image: var(--halftone-bg);
+    background-size: 10px 10px;
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  main {
+    display: block;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    margin: 0;
+    line-height: 1.15;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  img,
+  svg {
+    max-width: 100%;
+    display: block;
+  }
+
+  .ink-illustration {
+    filter: grayscale(1) contrast(1.25);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  @media (max-width: 640px) {
+    .wrap {
+      padding-inline: 20px;
+    }
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+const {
+  src,
+  alt = "",
+  width,
+  height,
+  loading = "lazy",
+  class: imageClass = "",
+  wrapClass = "",
+} = Astro.props;
+---
+
+
+
+
+
+<span class={`async-image-wrap ${wrapClass}`}>
+  <span class="async-image-spinner" aria-hidden="true"></span>
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    class={`async-image ${imageClass}`}
+  />
+</span>
+
+<style>
+  .async-image-wrap {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+  }
+
+  .async-image {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .async-image.is-loaded {
+    opacity: 1;
+  }
+
+  .async-image-spinner {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 28px;
+    height: 28px;
+    border: 3px solid var(--color-border);
+    border-top-color: var(--color-accent);
+    border-radius: 50%;
+    animation: async-image-spin 0.7s linear infinite;
+  }
+
+  .async-image-spinner.is-hidden {
+    display: none;
+  }
+
+  @keyframes async-image-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<script>
+  function revealAsyncImage(img) {
+    const wrap = img.closest(".async-image-wrap");
+    const spinner = wrap ? wrap.querySelector(".async-image-spinner") : null;
+    img.classList.add("is-loaded");
+    if (spinner) {
+      spinner.classList.add("is-hidden");
+    }
+  }
+
+  function initAsyncImages() {
+    const images = document.querySelectorAll("img.async-image:not([data-async-bound])");
+    images.forEach((img) => {
+      img.setAttribute("data-async-bound", "true");
+      if (img.complete && img.naturalWidth > 0) {
+        revealAsyncImage(img);
+      } else {
+        img.addEventListener("load", () => revealAsyncImage(img));
+        img.addEventListener("error", () => revealAsyncImage(img));
+      }
+    });
+  }
+
+  initAsyncImages();
+</script>

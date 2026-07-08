@@ -1,0 +1,290 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import AsyncImage from "../../components/AsyncImage.astro";
+
+const description =
+  "Conoce al equipo detras de VOLQOR Studios, el estudio independiente de El Salvador que desarrolla las aplicaciones del laboratorio.";
+
+const members = [
+  {
+    name: "Christian",
+    handle: "@pusheandoando",
+    role: "Fundador y desarrollador principal",
+    githubUrl: "https://github.com/pusheandoando",
+    avatarUrl: "https://avatars.githubusercontent.com/u/270544392?v=4",
+  },
+  {
+    name: "Camila Sosa",
+    role: "Traductora e interprete",
+    avatarUrl: "/imgpages/team/girl.svg",
+  },
+  {
+    name: "Diego Martinez",
+    role: "Ilustrador y Artista 2D",
+    avatarUrl: "/imgpages/team/boy.svg",
+  },
+  {
+    name: "Carlos Vasquez",
+    role: "Ingeniero DevOps",
+    avatarUrl: "/imgpages/team/boy.svg",
+  },
+  {
+    name: "Fernando Cabrera",
+    role: "Analista de Datos y Monetizacion",
+    avatarUrl: "/imgpages/team/boy.svg",
+  },
+];
+---
+
+
+
+
+
+<BaseLayout title="Equipo" description={description} path="/equipo/">
+  <section class="wrap page-header">
+    <h1>Equipo</h1>
+    <p class="page-description">
+      Las personas que disenan, desarrollan y mantienen cada proyecto de VOLQOR Studios.
+    </p>
+  </section>
+
+  <section class="wrap manifesto">
+    <article class="manifesto-item">
+      <AsyncImage
+        src="/imgpages/team/01.svg"
+        alt=""
+        width="220"
+        height="220"
+        loading="lazy"
+        wrapClass="manifesto-illustration-wrap"
+        class="ink-illustration manifesto-illustration"
+      />
+      <div class="manifesto-copy">
+        <h3>La libertad crea. La libertad materializa.</h3>
+        <p>
+          Cualquier miembro tiene libertad creativa total para llevar su idea hasta el final.
+        </p>
+      </div>
+    </article>
+
+    <article class="manifesto-item">
+      <AsyncImage
+        src="/imgpages/team/02.svg"
+        alt=""
+        width="220"
+        height="220"
+        loading="lazy"
+        wrapClass="manifesto-illustration-wrap"
+        class="ink-illustration manifesto-illustration"
+      />
+      <div class="manifesto-copy">
+        <h3>Coincidimos en el momento justo.</h3>
+        <p>
+          VOLQOR Studios es una comunidad de usuarios y tambien de desarrolladores y mentes independientes que se encontraron para construir algo propio.
+        </p>
+      </div>
+    </article>
+
+    <article class="manifesto-item">
+      <AsyncImage
+        src="/imgpages/team/03.svg"
+        alt=""
+        width="220"
+        height="220"
+        loading="lazy"
+        wrapClass="manifesto-illustration-wrap"
+        class="ink-illustration manifesto-illustration"
+      />
+      <div class="manifesto-copy">
+        <h3>El conocimiento se comparte o se estanca.</h3>
+        <p>
+          El progreso solo continua si brindamos herramientas utiles y precisas a quien las necesita.
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <section class="wrap team-grid">
+    {
+      members.map((member) => (
+        <article class="team-card">
+          {member.avatarUrl && (
+            <AsyncImage
+              src={member.avatarUrl}
+              alt={member.name}
+              width="88"
+              height="88"
+              wrapClass="member-avatar-wrap"
+              class="member-avatar"
+            />
+          )}
+
+          <h2 class="member-name">{member.name}</h2>
+          <p class="member-role">{member.role}</p>
+
+          <div class="member-links">
+            {member.handle && (
+              <span class="member-handle">{member.handle}</span>
+            )}
+
+            {member.githubUrl && (
+              <a
+                href={member.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+            )}
+          </div>
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-block: 72px 48px;
+    max-width: 720px;
+  }
+
+  .page-header h1 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+  }
+
+  .page-description {
+    margin-top: 20px;
+    color: var(--color-text-dim);
+    font-size: 1.05rem;
+  }
+
+  .manifesto {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-block: 16px 64px;
+  }
+
+  .manifesto-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .manifesto-item:nth-child(even) {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .manifesto-illustration-wrap {
+    width: 220px;
+    height: 220px;
+    flex-shrink: 0;
+  }
+
+  .manifesto-illustration {
+    width: 220px;
+    height: 220px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  .manifesto-copy h3 {
+    font-size: 1.35rem;
+    max-width: 30ch;
+  }
+
+  .manifesto-copy p {
+    margin-top: 14px;
+    color: var(--color-text-dim);
+    font-size: 1rem;
+    max-width: 52ch;
+  }
+
+  @media (max-width: 680px) {
+    .manifesto-illustration-wrap {
+      width: 170px;
+      height: 170px;
+    }
+
+    .manifesto-illustration {
+      width: 170px;
+      height: 170px;
+    }
+
+    .manifesto-copy p {
+      max-width: none;
+    }
+
+    .manifesto-item {
+      gap: 32px;
+    }
+
+    .manifesto-item:nth-child(even) {
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    padding-block: 24px 96px;
+  }
+
+  .team-card {
+    background: var(--color-surface);
+    border: 3px solid var(--color-border);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--color-ink);
+    padding: 28px;
+  }
+
+  .member-avatar-wrap {
+    width: 88px;
+    height: 88px;
+    margin-bottom: 20px;
+  }
+
+  .member-avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 3px solid var(--color-border);
+    object-fit: cover;
+  }
+
+  .member-name {
+    font-size: 1.3rem;
+  }
+
+  .member-role {
+    margin-top: 8px;
+    color: var(--color-text-dim);
+    font-size: 0.95rem;
+  }
+
+  .member-links {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  .member-handle {
+    color: var(--color-text-dim);
+  }
+
+  .member-links a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .member-links a:hover {
+    text-decoration: underline;
+  }
+</style>
